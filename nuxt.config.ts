@@ -3,7 +3,7 @@ export default defineNuxtConfig({
 	compatibilityDate: '2024-11-01',
 	devtools: { enabled: true },
 
-	css: ['@/assets/reset.scss'],
+	css: ['~/assets/reset.scss'],
 
 	modules: [
 		'@nuxt/content',
