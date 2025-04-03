@@ -85,12 +85,20 @@
 		padding-left: 1em;
 		box-shadow: inset 0px 0px 0px 0.0675em rgba(222, 222, 227, 0.4);
 		border-radius: 0.375em 0px 0px 0.375em;
+
+		&:focus {
+			outline: none;
+		}
 	}
 	&__button {
 		background-color: rgb(83, 83, 95, 0.4);
 		height: 3em;
 		width: 2.5em;
 		border-radius: 0px 0.375em 0.375em 0px;
+
+		&:hover {
+			background-color: rgb(83, 83, 95);
+		}
 	}
 	&__icon {
 		height: 1.5em;
@@ -104,6 +112,10 @@
 		color: white;
 		border-radius: 0.375em;
 		padding: 0.625em;
+
+		&:hover {
+			background-color: #0c84ff;
+		}
 	}
 	&__login {
 		display: block;
@@ -111,6 +123,10 @@
 		color: white;
 		border-radius: 0.375em;
 		padding: 0.625em;
+
+		&:hover {
+			background-color: rgb(83, 83, 95);
+		}
 	}
 	&__profile {
 		justify-self: flex-end;
