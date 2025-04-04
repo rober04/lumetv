@@ -1,4 +1,7 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import SuggestedChannels from '~/components/SuggestedChannels.vue';
+import { channels } from '#imports';
+</script>
 <template>
 	<header class="header">
 		<nav class="header__nav nav">
@@ -26,6 +29,21 @@
 			</div>
 		</nav>
 	</header>
+	<aside class="sidebar">
+		<div class="sidebar__header">
+			<h2 class="sidebar__title">RECOMMENDED CHANNELS</h2>
+			<button type="button" class="sidebar__button">
+				<img src="/CollapseIcon.svg" alt="" class="sidebar__icon" />
+			</button>
+		</div>
+		<ul class="sidebar__suggestedchannels suggestedchannels">
+			<SuggestedChannels
+				v-for="channel in channels"
+				:key="channel.broadcaster_id"
+				v-bind="channel" />
+		</ul>
+	</aside>
+	<slot></slot>
 </template>
 
 <style lang="scss" scoped>
@@ -34,14 +52,15 @@
 		display: flex;
 		justify-content: space-between;
 		height: 3.125em;
+		width: 100%;
 	}
 }
 
 .nav {
 	background-color: #18181b;
 	box-shadow:
-		0px 1px 2px rgba(0, 0, 0, 0.9),
-		0px 0px 2px rgba(0, 0, 0, 0.9);
+		0em 0.0625em 0.125em rgba(0, 0, 0, 0.9),
+		0em 0em 0.125em rgba(0, 0, 0, 0.9);
 	&__site {
 		display: flex;
 		align-items: center;
@@ -49,7 +68,7 @@
 		color: white;
 	}
 	&__title {
-		font-size: 0.75em;
+		font-size: 1em;
 		margin-left: 0.5em;
 		font-family: Arial, Helvetica, sans-serif;
 		font-weight: 600;
@@ -58,7 +77,6 @@
 		width: 1.75em;
 	}
 	&__menu {
-		color: white;
 		margin-left: 1.75em;
 		height: 1em;
 	}
@@ -80,10 +98,10 @@
 		width: 24.375em;
 		height: 3em;
 		background: #18181b;
-		color: white;
+		color: #dedee3;
 		font-weight: 400;
 		padding-left: 1em;
-		box-shadow: inset 0px 0px 0px 0.0675em rgba(222, 222, 227, 0.4);
+		box-shadow: 0px 0px 0px 0.0675em rgba(222, 222, 227, 0.4);
 		border-radius: 0.375em 0px 0px 0.375em;
 
 		&:focus {
@@ -92,7 +110,7 @@
 	}
 	&__button {
 		background-color: rgb(83, 83, 95, 0.4);
-		height: 3em;
+		height: 3.1em;
 		width: 2.5em;
 		border-radius: 0px 0.375em 0.375em 0px;
 
@@ -134,6 +152,31 @@
 	}
 	&__prime {
 		margin-right: 0.5em;
+	}
+}
+.sidebar {
+	width: 17em;
+	height: 100%;
+	padding: 1.9em 0 0 0;
+	color: #dedee3;
+	background-color: #0f0e11;
+	float: left;
+
+	&__header {
+		display: flex;
+		justify-content: space-between;
+		padding: 0 1.2em 0 1.5em;
+	}
+	&__title {
+		font-size: 0.8em;
+		font-weight: 600;
+		margin-bottom: 0.5em;
+	}
+	&__button {
+		background-color: transparent;
+	}
+	&__icon {
+		height: 1em;
 	}
 }
 </style>
