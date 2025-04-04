@@ -1,17 +1,8 @@
 class TwitchApi {
 	accessToken: string = 'X';
-	url: string;
+	data: Array<unknown> = [];
 
-	constructor(url: string) {
-		this.url = url;
-		this.init();
-	}
-
-	async init() {
-		await this.getOAuthToken();
-		console.log('OAuth Token:', this.accessToken);
-		console.log(await this.twitchRequest());
-	}
+	constructor() {}
 
 	async getOAuthToken() {
 		const params = new URLSearchParams({
@@ -40,7 +31,8 @@ class TwitchApi {
 		}
 	}
 
-	async twitchRequest() {
+	async request<T>(url: string) {
+		await this.getOAuthToken();
 		const twitchOptions = {
 			method: 'GET',
 			headers: {
@@ -50,7 +42,7 @@ class TwitchApi {
 		};
 
 		try {
-			const response = await fetch(this.url, twitchOptions);
+			const response = await fetch(url, twitchOptions);
 
 			if (!response.ok) {
 				const errorText = await response.text();
@@ -60,7 +52,7 @@ class TwitchApi {
 			}
 
 			const data = await response.json();
-			return data;
+			this.data = data.data as T[];
 		} catch (error) {
 			console.error('Error fetching Twitch user data:', error);
 		}
