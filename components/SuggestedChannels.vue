@@ -61,6 +61,7 @@ if (props.viewer_count > NUMBER_OF_VIEWERS) {
 		color: #adadb8;
 	}
 	&__viewers {
+		font-size: 0.85em;
 		color: #adadb8;
 	}
 }
