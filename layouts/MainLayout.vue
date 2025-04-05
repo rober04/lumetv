@@ -55,7 +55,10 @@ onMounted(async () => {
 
 <style lang="scss" scoped>
 .header {
+	z-index: 1;
+
 	&__nav {
+		position: fixed;
 		display: flex;
 		justify-content: space-between;
 		height: 3.125em;
@@ -164,10 +167,13 @@ onMounted(async () => {
 .sidebar {
 	width: 17em;
 	padding: 1.9em 0 0 0;
+	height: 100vh;
 	color: #dedee3;
 	background-color: #0f0e11;
 	float: left;
-
+	position: fixed;
+	overflow-y: auto;
+	top: 3.125em;
 	&__header {
 		display: flex;
 		justify-content: space-between;

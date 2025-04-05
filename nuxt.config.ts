@@ -4,6 +4,15 @@ export default defineNuxtConfig({
 	devtools: { enabled: true },
 
 	css: ['~/assets/reset.scss'],
+	app: {
+		head: {
+			script: [
+				{
+					src: 'https://embed.twitch.tv/embed/v1.js',
+				},
+			],
+		},
+	},
 
 	modules: [
 		'@nuxt/content',

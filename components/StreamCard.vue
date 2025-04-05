@@ -7,13 +7,15 @@ const thumbnail_url = ref(props.thumbnail_url.replace('{width}x{height}', '380x2
 
 <template>
 	<li class="livestreams__card card">
-		<div class="card__thumbnail">
+		<NuxtLink :to="`/${props.broadcaster_name}`" class="card__thumbnail">
 			<img :src="thumbnail_url" alt="Stream thumbnail" class="card__thumbnail--animation" />
-		</div>
+		</NuxtLink>
 		<article class="card__stream">
 			<img :src="$props.profile_image_url" alt="Streamer logo" class="card__logo" />
 			<div class="card__info">
-				<p class="card__title">{{ props.title }}</p>
+				<NuxtLink :to="`/${props.broadcaster_name}`">
+					<p class="card__title">{{ props.title }}</p>
+				</NuxtLink>
 				<p class="card__channel">
 					{{ props.broadcaster_name }} <img src="/VerifiedIcon.svg" alt="Verified" />
 				</p>
