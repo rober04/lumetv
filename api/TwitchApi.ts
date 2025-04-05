@@ -32,7 +32,6 @@ class TwitchApi {
 	}
 
 	async request<T>(url: string) {
-		await this.getOAuthToken();
 		const twitchOptions = {
 			method: 'GET',
 			headers: {
