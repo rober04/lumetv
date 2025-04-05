@@ -1,6 +1,13 @@
 <script setup lang="ts">
 import SuggestedChannels from '~/components/SuggestedChannels.vue';
-import { channels } from '#imports';
+import { getChannels } from '#imports';
+import type { Channel } from '~/types/Channel';
+
+let channels = ref<Channel[]>([]);
+
+onMounted(async () => {
+	channels.value = await getChannels();
+});
 </script>
 <template>
 	<header class="header">
@@ -156,7 +163,6 @@ import { channels } from '#imports';
 }
 .sidebar {
 	width: 17em;
-	height: 100%;
 	padding: 1.9em 0 0 0;
 	color: #dedee3;
 	background-color: #0f0e11;
