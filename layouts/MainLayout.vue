@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import SuggestedChannels from '~/components/SuggestedChannels.vue';
-import { getChannels } from '#imports';
 import type { Channel } from '~/types/Channel';
 
 let channels = ref<Channel[]>([]);
@@ -8,6 +6,15 @@ let channels = ref<Channel[]>([]);
 onMounted(async () => {
 	channels.value = await getChannels();
 });
+
+const loginWithTwitch = () => {
+	const clientId = import.meta.env.VITE_TWITCH_CLIENT_ID as string;
+	const redirectUri = encodeURIComponent('http://localhost:3000/auth/callback');
+	const scopes = ['chat:edit', 'chat:read', 'user:read:email'];
+
+	const url = `https://id.twitch.tv/oauth2/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=code&scope=${scopes.join('+')}`;
+	window.location.href = url;
+};
 </script>
 <template>
 	<header class="header">
@@ -18,21 +25,25 @@ onMounted(async () => {
 					alt="Website's logo"
 					class="nav__logo"
 					onclick="location.href = '/';"
-					title="Index" />
+					title="Go to Index" />
 				<h1 class="nav__title">LUMETV</h1>
 				<img src="/MenuIcon.svg" alt="Menu icon" class="nav__menu" aria-label="Menu" />
 			</div>
 			<div class="nav__searchbar searchbar">
 				<input type="text" name="" id="" class="searchbar__text" placeholder="Search" />
 				<button type="button" class="searchbar__button">
-					<img src="/SearchIcon.svg" alt="" class="searchbar__icon" />
+					<img
+						src="/SearchIcon.svg"
+						alt="Search icon"
+						class="searchbar__icon"
+						aria-label="Search" />
 				</button>
 			</div>
 			<div class="nav__user user">
-				<img src="/PrimeIcon.svg" alt="" class="user__prime" />
-				<button type="button" class="user__login">Log In</button>
+				<img src="/PrimeIcon.svg" alt="Prime icon" class="user__prime" aria-label="Prime" />
+				<button type="button" class="user__login" @click="loginWithTwitch">Log In</button>
 				<button type="button" class="user__signup">Register</button>
-				<img src="/ProfileIcon.svg" alt="" class="user__profile" />
+				<img src="/ProfileIcon.svg" alt="User icon" class="user__profile" aria-label="Profile" />
 			</div>
 		</nav>
 	</header>
@@ -40,7 +51,11 @@ onMounted(async () => {
 		<div class="sidebar__header">
 			<h2 class="sidebar__title">RECOMMENDED CHANNELS</h2>
 			<button type="button" class="sidebar__button">
-				<img src="/CollapseIcon.svg" alt="" class="sidebar__icon" />
+				<img
+					src="/CollapseIcon.svg"
+					alt="Collapse icon"
+					class="sidebar__icon"
+					aria-label="Collapse channels" />
 			</button>
 		</div>
 		<ul class="sidebar__suggestedchannels suggestedchannels">
@@ -50,16 +65,15 @@ onMounted(async () => {
 				v-bind="channel" />
 		</ul>
 	</aside>
-	<slot></slot>
+	<slot class="main"></slot>
 </template>
 
 <style lang="scss" scoped>
 .header {
-	z-index: 1;
-
 	&__nav {
-		position: fixed;
+		z-index: 3;
 		display: flex;
+		position: fixed;
 		justify-content: space-between;
 		height: 3.125em;
 		width: 100%;
@@ -85,10 +99,20 @@ onMounted(async () => {
 	}
 	&__logo {
 		width: 1.75em;
+		transition: all 0.2s ease;
+		&:hover {
+			cursor: pointer;
+			transform: scale(1.1);
+		}
 	}
 	&__menu {
 		margin-left: 1.75em;
 		height: 1em;
+		transition: all 0.2s ease;
+		&:hover {
+			cursor: pointer;
+			transform: scale(1.1);
+		}
 	}
 	&__searchbar {
 		display: flex;
@@ -105,7 +129,8 @@ onMounted(async () => {
 .searchbar {
 	&__text {
 		margin: 0 auto;
-		width: 24.375em;
+		width: 23vw;
+		max-width: 24em;
 		height: 3em;
 		background: #18181b;
 		color: #dedee3;
@@ -165,13 +190,13 @@ onMounted(async () => {
 	}
 }
 .sidebar {
+	position: fixed;
 	width: 17em;
 	padding: 1.9em 0 0 0;
 	height: 100vh;
 	color: #dedee3;
 	background-color: #0f0e11;
 	float: left;
-	position: fixed;
 	overflow-y: auto;
 	top: 3.125em;
 	&__header {

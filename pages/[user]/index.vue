@@ -33,7 +33,7 @@ if ((streamerInfoData.followers as number) > MILLION_FORMATTER) {
 				:style="{ height: '75vh' }">
 			</iframe>
 			<article class="main__info info">
-				<img class="info__avatar" :src="streamerInfoData.profile_image_url" alt="" />
+				<img class="info__avatar" :src="streamerInfoData.profile_image_url" alt="Streamer avatar" />
 				<div class="info__text">
 					<header class="info__header">
 						<h1 class="info__streamer">
@@ -41,13 +41,13 @@ if ((streamerInfoData.followers as number) > MILLION_FORMATTER) {
 						</h1>
 						<div class="info__buttons">
 							<button class="info__follow">
-								<img src="/FollowIcon.svg" />
+								<img src="/FollowIcon.svg" alt="Follow icon" />
 								Follow
 							</button>
 							<button class="info__subscribe">
-								<img src="/SubscribeIcon.svg" alt="" />
+								<img src="/SubscribeIcon.svg" alt="Subscribe icon" />
 								Subscribe
-								<img src="/SubscribeDownIcon.svg" />
+								<img src="/SubscribeDownIcon.svg" alt="Subscribe down icon" />
 							</button>
 						</div>
 					</header>
@@ -68,10 +68,18 @@ if ((streamerInfoData.followers as number) > MILLION_FORMATTER) {
 					<span class="about__description">{{ streamerInfoData.description }}</span>
 					<div class="divider"></div>
 					<div class="about__socials socials">
-						<button class="socials__button"><img src="/YoutubeIcon.svg" />YouTube</button>
-						<button class="socials__button"><img src="/InstagramIcon.svg" />Instagram</button>
-						<button class="socials__button"><img src="/TwitterIcon.svg" />Twitter</button>
-						<button class="socials__button"><img src="/TiktokIcon.svg" />TikTok</button>
+						<button class="socials__button">
+							<img src="/YoutubeIcon.svg" alt="Youtube icon" />YouTube
+						</button>
+						<button class="socials__button">
+							<img src="/InstagramIcon.svg" alt="Instagram icon" />Instagram
+						</button>
+						<button class="socials__button">
+							<img src="/TwitterIcon.svg" alt="Twitter icon" />Twitter
+						</button>
+						<button class="socials__button">
+							<img src="/TiktokIcon.svg" alt="TikTok icon" />TikTok
+						</button>
 					</div>
 				</div>
 			</footer>

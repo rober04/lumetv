@@ -1,19 +1,21 @@
 <script setup lang="ts">
 import type { Channel } from '~/types/Channel';
+
 const props = defineProps<Channel>();
 
 const thumbnail_url = ref(props.thumbnail_url.replace('{width}x{height}', '380x210'));
+const streamerName = props.broadcaster_login as string;
 </script>
 
 <template>
 	<li class="livestreams__card card">
-		<NuxtLink :to="`/${props.broadcaster_name}`" class="card__thumbnail">
+		<NuxtLink :to="{ path: `/${streamerName}` }" class="card__thumbnail">
 			<img :src="thumbnail_url" alt="Stream thumbnail" class="card__thumbnail--animation" />
 		</NuxtLink>
 		<article class="card__stream">
 			<img :src="$props.profile_image_url" alt="Streamer logo" class="card__logo" />
 			<div class="card__info">
-				<NuxtLink :to="`/${props.broadcaster_name}`">
+				<NuxtLink :to="`/${props.broadcaster_login}`">
 					<p class="card__title">{{ props.title }}</p>
 				</NuxtLink>
 				<p class="card__channel">
@@ -34,14 +36,14 @@ const thumbnail_url = ref(props.thumbnail_url.replace('{width}x{height}', '380x2
 		position: relative;
 		display: inline-block;
 		background-color: #199afc;
-
+		z-index: 1;
 		&:before,
 		&:after {
 			content: '';
 			display: block;
 			background-color: #199afc;
-			width: 8px;
-			height: 8px;
+			width: 0.5em;
+			height: 0.5em;
 			position: absolute;
 			transition: all 0.15s ease;
 		}
@@ -68,7 +70,7 @@ const thumbnail_url = ref(props.thumbnail_url.replace('{width}x{height}', '380x2
 			cursor: pointer;
 		}
 		&:hover &--animation {
-			transform: translate(6px, -6px);
+			transform: translate(0.375em, -0.375em);
 		}
 		&:hover:before {
 			transform: rotate(-45deg) scale(1);
@@ -85,7 +87,7 @@ const thumbnail_url = ref(props.thumbnail_url.replace('{width}x{height}', '380x2
 		border-radius: 50%;
 		height: 2.8em;
 		width: 2.8em;
-		margin-top: 0.3em;
+		margin: 0.3em 0 0 0;
 	}
 	&__info {
 		width: 20.5em;
@@ -99,7 +101,7 @@ const thumbnail_url = ref(props.thumbnail_url.replace('{width}x{height}', '380x2
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
-		margin-top: 0.8em;
+		margin: 0.8em 0 0 0;
 		align-self: center;
 		&:hover {
 			cursor: pointer;
@@ -122,7 +124,7 @@ const thumbnail_url = ref(props.thumbnail_url.replace('{width}x{height}', '380x2
 	&__tags {
 		display: flex;
 		gap: 0.5em;
-		margin-top: 1em;
+		margin: 1em 0 0 0;
 		flex-wrap: wrap;
 	}
 	&__tag {

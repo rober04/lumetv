@@ -22,7 +22,6 @@ class StreamInfo {
 		channelData.profile_image_url = (streamerProfile as User).profile_image_url;
 		channelData.description = (streamerProfile as User).description;
 		channelData.followers = await this.getFollowerInfo();
-		console.log(channelData.followers);
 
 		return channelData;
 	}
@@ -33,7 +32,6 @@ class StreamInfo {
 		await twitchRequest.request(
 			`https://api.twitch.tv/helix/channels/followers?broadcaster_id=${(streamerProfile as User).id}`,
 		);
-		console.log((twitchRequest.fullData as any).total);
 		return (twitchRequest.fullData as any).total;
 	}
 	async getProfileInfo() {

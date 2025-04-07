@@ -2,8 +2,10 @@
 const route = useRoute();
 const router = useRouter();
 
-const clientId = '9ngbnqy73cynj4m4ouiek360qx57uw';
-const clientSecret = 'fc97e5nn7brtelzyr5kvzrw6c0sqqo';
+const config = useRuntimeConfig();
+
+const clientId = config.public.twitchClientId as string;
+const clientSecret = config.public.twitchClientSecret as string;
 const redirectUri = 'http://localhost:3000/auth/callback';
 
 onMounted(async () => {
