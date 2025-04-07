@@ -27,8 +27,6 @@ class StreamInfo {
 	}
 	async getFollowerInfo() {
 		const streamerProfile = (await this.getProfileInfo()) as unknown;
-
-		console.log(streamerProfile as User);
 		await twitchRequest.request(
 			`https://api.twitch.tv/helix/channels/followers?broadcaster_id=${(streamerProfile as User).id}`,
 		);
