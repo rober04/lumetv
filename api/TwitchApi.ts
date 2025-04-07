@@ -1,13 +1,14 @@
 class TwitchApi {
 	accessToken: string = 'X';
 	data: Array<unknown> = [];
+	fullData: Array<unknown> = [];
 
 	constructor() {}
 
 	async getOAuthToken() {
 		const params = new URLSearchParams({
 			client_id: '9ngbnqy73cynj4m4ouiek360qx57uw',
-			client_secret: 'p3w7nfu39sweayk0cr941hsiszgvp5',
+			client_secret: 'fc97e5nn7brtelzyr5kvzrw6c0sqqo',
 			grant_type: 'client_credentials',
 		});
 
@@ -52,8 +53,9 @@ class TwitchApi {
 
 			const data = await response.json();
 			this.data = data.data as T[];
+			this.fullData = data as T[];
 		} catch (error) {
-			console.error('Error fetching Twitch user data:', error);
+			console.error('Error fetching Twitch user data:', (error as Error).message);
 		}
 	}
 }
