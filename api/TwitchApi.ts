@@ -7,10 +7,11 @@ class TwitchApi {
 
 	async getOAuthToken() {
 		const params = new URLSearchParams({
-			client_id: import.meta.env.VITE_TWITCH_CLIENT_ID as string,
-			client_secret: import.meta.env.VITE_TWITCH_CLIENT_SECRET as string,
+			client_id: '9ngbnqy73cynj4m4ouiek360qx57uw',
+			client_secret: 'fc97e5nn7brtelzyr5kvzrw6c0sqqo',
 			grant_type: 'client_credentials',
 		});
+
 		try {
 			const response = await fetch('https://id.twitch.tv/oauth2/token', {
 				method: 'POST',
@@ -24,7 +25,7 @@ class TwitchApi {
 				throw new Error(`HTTP error! Status: ${response.status} - ${response.statusText}`);
 			}
 
-			const data = await response.json();
+			const data = (await response.json()) as { access_token: string };
 			this.accessToken = data.access_token;
 		} catch (error) {
 			console.error('Error fetching OAuth token:', error);
@@ -50,9 +51,9 @@ class TwitchApi {
 				);
 			}
 
-			const data = await response.json();
-			this.data = data.data as T[];
-			this.fullData = data as T[];
+			const data: any = await response.json();
+			this.data = data.data;
+			this.fullData = data;
 		} catch (error) {
 			console.error('Error fetching Twitch user data:', (error as Error).message);
 		}
