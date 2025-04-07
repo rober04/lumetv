@@ -3,11 +3,13 @@
   "version": "1.0.0",
   "type": "module",
   "main": "index.ts",
-  "scripts": {
-    "start": "node --loader ts-node/esm index.ts"
-  },
+"scripts": {
+  "start": "ts-node index.ts"
+},
   "dependencies": {
     "tmi.js": "^1.8.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3",
     "ws": "^8.13.0"
   }
 }
