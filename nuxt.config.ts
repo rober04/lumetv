@@ -31,9 +31,13 @@ export default defineNuxtConfig({
 		twitchUser: process.env.TWITCH_USERNAME,
 		twitchToken: process.env.TWITCH_TOKEN,
 		twitchChannel: process.env.TWITCH_CHANNEL,
+		twitchClientId: process.env.VITE_TWITCH_CLIENT_ID,
+		twitchClientSecret: process.env.VITE_TWITCH_CLIENT_SECRET,
 		public: {
 			twitchUser: process.env.TWITCH_USERNAME,
 			twitchChannel: process.env.TWITCH_CHANNEL,
+			twitchClientId: process.env.VITE_TWITCH_CLIENT_ID,
+			twitchClientSecret: process.env.VITE_TWITCH_CLIENT_SECRET,
 		},
 	},
 	nitro: {
