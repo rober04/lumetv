@@ -1,0 +1,47 @@
+import { TwitchApi } from '~/api/TwitchApi';
+import type { User } from '~/types/User';
+import type { Channel } from '~/types/Channel';
+
+const twitchRequest = new TwitchApi();
+await twitchRequest.getOAuthToken();
+
+class StreamInfo {
+	broadcasterLogin: string;
+
+	constructor(broadcasterLogin: string) {
+		this.broadcasterLogin = broadcasterLogin;
+	}
+	async getStreamInfo() {
+		const streamerProfile = (await this.getProfileInfo()) as unknown;
+		await twitchRequest.request(
+			`https://api.twitch.tv/helix/channels?broadcaster_id=${(streamerProfile as User).id}`,
+		);
+
+		const channelData = twitchRequest.data[0] as Channel;
+
+		channelData.profile_image_url = (streamerProfile as User).profile_image_url;
+		channelData.description = (streamerProfile as User).description;
+		channelData.followers = await this.getFollowerInfo();
+		console.log(channelData.followers);
+
+		return channelData;
+	}
+	async getFollowerInfo() {
+		const streamerProfile = (await this.getProfileInfo()) as unknown;
+
+		console.log(streamerProfile as User);
+		await twitchRequest.request(
+			`https://api.twitch.tv/helix/channels/followers?broadcaster_id=${(streamerProfile as User).id}`,
+		);
+		console.log((twitchRequest.fullData as any).total);
+		return (twitchRequest.fullData as any).total;
+	}
+	async getProfileInfo() {
+		await twitchRequest.request(
+			`https://api.twitch.tv/helix/users?login=${this.broadcasterLogin}&fields=id,profile_image_url,description`,
+		);
+		return twitchRequest.data[0];
+	}
+}
+
+export { StreamInfo };
