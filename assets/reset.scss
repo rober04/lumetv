@@ -4,12 +4,26 @@
 	border: 0;
 	box-sizing: border-box;
 	font-family: Arial, Helvetica, sans-serif;
+	&::-webkit-scrollbar {
+		width: 0.5em;
+	}
+	&::-webkit-scrollbar-track {
+		background: #1f1f23;
+	}
+	&::-webkit-scrollbar-thumb {
+		background-color: #199afc;
+		border-radius: 0.5em;
+		border: 0.125em solid #1f1f23;
+	}
 }
 a {
 	margin: 0;
 	padding: 0;
+	text-decoration: none;
 }
 button {
+	border: none;
+	border-radius: 0.3125em;
 	cursor: pointer;
 }
 ul {
@@ -18,4 +32,8 @@ ul {
 }
 li {
 	list-style: none;
+}
+body,
+html {
+	height: 100%;
 }

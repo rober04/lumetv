@@ -18,7 +18,7 @@ async function getChannels() {
 
 		for (let i = 0; i < streams.value.length; i++) {
 			await twitchRequest.request(
-				`https://api.twitch.tv/helix/channels?broadcaster_id=${streams.value[i].user_id}&fields=broadcaster_id,broadcaster_name,game_name,title`,
+				`https://api.twitch.tv/helix/channels?broadcaster_id=${streams.value[i].user_id}&fields=broadcaster_id,broadcaster_name,broadcaster_login,description,game_name,title`,
 			);
 			const channelData = twitchRequest.data[0] as Channel;
 
