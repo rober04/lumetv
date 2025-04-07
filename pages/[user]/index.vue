@@ -1,27 +1,36 @@
 <script setup lang="ts">
+import { onMounted, ref } from 'vue';
+import { useRoute } from 'vue-router';
 import { StreamInfo } from '#imports';
 
 const route = useRoute();
 const user = route.params.user as string;
 
-const streamerInfo = new StreamInfo(user);
-const streamerInfoData = await streamerInfo.getStreamInfo();
-
-let followerCount = streamerInfoData.followers;
-let followerCountModified = '';
+const streamerInfoData = ref<any>(null);
+const followerCountModified = ref('');
 
 const THOUSAND_FORMATTER = 1000;
 const MILLION_FORMATTER = 1000000;
-if ((streamerInfoData.followers as number) > MILLION_FORMATTER) {
-	followerCount = (followerCount as number) / MILLION_FORMATTER;
-	followerCountModified = followerCount.toFixed(1) + 'M';
-} else if ((streamerInfoData.followers as number) > THOUSAND_FORMATTER) {
-	followerCount = (followerCount as number) / THOUSAND_FORMATTER;
-	followerCountModified = followerCount.toFixed(1) + 'K';
-}
+
+onMounted(async () => {
+	const streamerInfo = new StreamInfo(user);
+	const data = await streamerInfo.getStreamInfo();
+
+	streamerInfoData.value = data;
+
+	let followerCount = data.followers as number;
+
+	if (followerCount > MILLION_FORMATTER) {
+		followerCountModified.value = (followerCount / MILLION_FORMATTER).toFixed(1) + 'M';
+	} else if (followerCount > THOUSAND_FORMATTER) {
+		followerCountModified.value = (followerCount / THOUSAND_FORMATTER).toFixed(1) + 'K';
+	} else {
+		followerCountModified.value = followerCount.toString();
+	}
+});
 </script>
 
-<template>
+<template v-if="streamerInfoData">
 	<NuxtLayout :name="'main-layout'">
 		<main class="main">
 			<iframe
