@@ -41,9 +41,6 @@ export default defineNuxtConfig({
 		},
 	},
 	nitro: {
-		preset: 'node',
-		experimental: {
-			websocket: true,
-		},
+		preset: 'vercel',
 	},
 });
