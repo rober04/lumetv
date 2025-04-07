@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import LiveStreams from '~/components/LiveStreams.vue';
-import { getChannels } from '#imports';
 import type { Channel } from '~/types/Channel';
 
 let channels = ref<Channel[]>([]);
@@ -16,17 +14,23 @@ definePageMeta({
 
 <template>
 	<NuxtLayout :name="'main-layout'">
-		<main>
-			<LiveStreams class="main__livestreams" :rowNumber="0" :channels="channels" />
-			<LiveStreams class="main__livestreams" :rowNumber="1" :channels="channels" />
-			<LiveStreams class="main__livestreams" :rowNumber="2" :channels="channels" />
-			<LiveStreams class="main__livestreams" :rowNumber="3" :channels="channels" />
+		<main class="main-page">
+			<LiveStreams class="main-page__livestreams" :rowNumber="0" :channels="channels" />
+			<LiveStreams class="main-page__livestreams" :rowNumber="1" :channels="channels" />
+			<TheCategories class="main-page__categories"></TheCategories>
+			<LiveStreams class="main-page__livestreams" :rowNumber="2" :channels="channels" />
+			<LiveStreams class="main-page__livestreams" :rowNumber="3" :channels="channels" />
 		</main>
 	</NuxtLayout>
 </template>
 
 <style lang="scss" scoped>
-.main__livestreams {
-	background-color: #0f0e11;
+.main-page {
+	margin: 0 0 0 17em;
+	padding: 3.125em 0 0 0;
+	&__livestreams,
+	&__categories {
+		background-color: #0f0e11;
+	}
 }
 </style>
