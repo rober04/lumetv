@@ -23,7 +23,7 @@ console.log('[WS] ✅ WebSocket server iniciado en puerto 8080');
 const twitchClients = new Map<string, tmi.Client>();
 
 wss.on('connection', async (socket, req) => {
-	const url = new URL(req.url || '', `http://${req.headers.host}`);
+	const url = new URL(req.url || '', `https://${req.headers.host}`);
 	const channel = url.searchParams.get('channel');
 
 	if (!channel) {

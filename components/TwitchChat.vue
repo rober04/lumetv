@@ -36,7 +36,7 @@ const handleScroll = () => {
 };
 
 onMounted(() => {
-	ws = new WebSocket(`ws://localhost:8080?channel=${props.channel}`);
+	ws = new WebSocket(`wss://lumetv-backend.onrender.com?channel=${props.channel}`);
 
 	ws.onopen = () => console.log('[WS] ✅ Conectado');
 	ws.onmessage = (e) => {
