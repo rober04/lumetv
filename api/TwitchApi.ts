@@ -7,8 +7,8 @@ class TwitchApi {
 
 	async getOAuthToken() {
 		const params = new URLSearchParams({
-			client_id: '9ngbnqy73cynj4m4ouiek360qx57uw',
-			client_secret: 'fc97e5nn7brtelzyr5kvzrw6c0sqqo',
+			client_id: import.meta.env.VITE_TWITCH_CLIENT_ID as string,
+			client_secret: import.meta.env.VITE_TWITCH_CLIENT_SECRET as string,
 			grant_type: 'client_credentials',
 		});
 
