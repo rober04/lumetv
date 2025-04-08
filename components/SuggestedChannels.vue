@@ -14,7 +14,7 @@ if (props.viewer_count > NUMBER_OF_VIEWERS) {
 
 <template>
 	<li class="suggestedchannels__channel channel">
-		<NuxtLink :to="'/'+props.broadcaster_login" class="channel__button" class="channel__button">
+		<NuxtLink :to="'/'+props.broadcaster_login" class="channel__button">
 		<img :src="$props.profile_image_url" alt="Streamer logo" class="channel__logo" />
 		<div class="channel__info">
 			<p class="channel__name">{{ $props.broadcaster_name }}</p>
