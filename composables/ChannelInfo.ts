@@ -3,12 +3,12 @@ import type { Channel } from '~/types/Channel';
 import type { User } from '~/types/User';
 import type { Stream } from '~/types/Stream';
 
-let twitchRequest: TwitchApi;
+const twitchRequest = new TwitchApi();
 let streamsCache: Stream[] = [];
 const channelsCache = ref<Channel[]>([]);
 
 async function initTwitchApi() {
-	twitchRequest = new TwitchApi();
+
 	await twitchRequest.getOAuthToken();
 
 	await twitchRequest.request(
