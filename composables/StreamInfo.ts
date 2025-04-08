@@ -2,12 +2,12 @@ import { TwitchApi } from '~/api/TwitchApi';
 import type { User } from '~/types/User';
 import type { Channel } from '~/types/Channel';
 
-let twitchRequest: TwitchApi;
+const twitchRequest = new TwitchApi();
 let isInitialized = false;
 
 async function initTwitchApi() {
 	if (!isInitialized) {
-		twitchRequest = new TwitchApi();
+
 		await twitchRequest.getOAuthToken();
 		isInitialized = true;
 	}
