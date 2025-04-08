@@ -6,7 +6,7 @@ const config = useRuntimeConfig();
 
 const clientId = config.public.twitchClientId as string;
 const clientSecret = config.public.twitchClientSecret as string;
-const redirectUri = 'http://localhost:3000/auth/callback';
+const redirectUri = 'https://lumetv.vercel.app/auth/callback';
 
 onMounted(async () => {
 	const code = route.query.code as string;
@@ -27,7 +27,7 @@ onMounted(async () => {
 			body,
 		});
 
-		const tokenData = await tokenRes.json();
+		const tokenData = (await tokenRes.json()) as { access_token: string };
 		if (!tokenData.access_token) throw new Error('Token no recibido');
 
 		const userRes = await fetch('https://api.twitch.tv/helix/users', {
@@ -36,7 +36,11 @@ onMounted(async () => {
 				'Client-Id': clientId,
 			},
 		});
-		const userData = await userRes.json();
+		const userData = (await userRes.json()) as {
+			data: {
+				login: string;
+			}[];
+		};
 		const username = userData.data?.[0]?.login || '';
 
 		useCookie('twitch_token', { path: '/' }).value = tokenData.access_token;

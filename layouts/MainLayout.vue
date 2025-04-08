@@ -9,7 +9,7 @@ onMounted(async () => {
 
 const loginWithTwitch = () => {
 	const clientId = import.meta.env.VITE_TWITCH_CLIENT_ID as string;
-	const redirectUri = encodeURIComponent('http://localhost:3000/auth/callback');
+	const redirectUri = encodeURIComponent('https://lumetv.vercel.app/auth/callback');
 	const scopes = ['chat:edit', 'chat:read', 'user:read:email'];
 
 	const url = `https://id.twitch.tv/oauth2/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=code&scope=${scopes.join('+')}`;

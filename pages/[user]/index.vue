@@ -35,7 +35,7 @@ onMounted(async () => {
 		<main class="main">
 			<iframe
 				class="main__stream"
-				:src="`https://player.twitch.tv/?channel=${route.params.user}&parent=localhost`"
+				:src="`https://player.twitch.tv/?channel=${route.params.user}&parent=lumetv.vercel.app`"
 				frameborder="0"
 				allowfullscreen="true"
 				scrolling="no"
