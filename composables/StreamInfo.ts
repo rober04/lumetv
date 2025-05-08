@@ -7,7 +7,6 @@ let isInitialized = false;
 
 async function initTwitchApi() {
 	if (!isInitialized) {
-
 		await twitchRequest.getOAuthToken();
 		isInitialized = true;
 	}
