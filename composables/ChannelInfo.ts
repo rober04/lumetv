@@ -8,7 +8,6 @@ let streamsCache: Stream[] = [];
 const channelsCache = ref<Channel[]>([]);
 
 async function initTwitchApi() {
-
 	await twitchRequest.getOAuthToken();
 
 	await twitchRequest.request(
